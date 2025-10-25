@@ -1,5 +1,16 @@
 name: Events Demo 1
-on: ...
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+  push:
+    branches:
+      - master #trigger workflow only when a push occurs on the main/master
+      - branch-* # wildcard branch-1, branch-a
+      - branch-** # wildcard branch-1, branch-a, branch-1-2
+    paths-ignore:
+      - '.github/workflows/*' # Don't trigger if any workflow file changes
 jobs:
   deploy:
     runs-on: ubuntu-latest
